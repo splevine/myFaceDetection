@@ -15,14 +15,11 @@ def showImage(str, img):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-## Haar cascade classifier
-# XML training files for Haar cascade are stored in 'opencv/data/haarcascadesfolder'
-
+## Haar cascade classifier: XML training files for Haar cascade are stored in 'data/haarcascadesfolder'
 # load cascade classifier training file for haarcascade
 haar_face_cascade = cv2.CascadeClassifier('data/haarcascade_frontalface_alt.xml')
 
-#load test image
-test1 = cv2.imread('data/test1.jpg')
+
 
 def detect_faces(f_cascade, colored_img, scaleFactor, minNeighbors):
     img_copy = np.copy(colored_img)
@@ -43,11 +40,31 @@ def detect_faces(f_cascade, colored_img, scaleFactor, minNeighbors):
 
     return img_copy
 
-test2 = cv2.imread('data/test3.jpg')
+test1 = cv2.imread('data/test21.jpg')
+face_detected_img = detect_faces(haar_face_cascade, test1, 1.1, 3)
+showImage('Haar cascade 1', face_detected_img)
 
-face_detected_img = detect_faces(haar_face_cascade, test2, 1.2, 5)
+#load test image
+# test1 = cv2.imread('data/test1.jpg')
+#
+# # run face detection
+# face_detected_img = detect_faces(haar_face_cascade, test1, 1.1, 5)
+#
+# showImage('Color Test 1', face_detected_img)
 
-showImage('Color Test 2', face_detected_img)
+#load cascade classifier training file for lbpcascade
+lbp_face_cascade = cv2.CascadeClassifier('data/lbpcascade_frontalface.xml')
+
+#load test image
+test2 = cv2.imread('data/test21.jpg')
+#call detect faces
+faces_detected_img2 = detect_faces(lbp_face_cascade, test2, 1.2, 5)
+
+#conver image to RGB and show image
+showImage('LBP Cascade', faces_detected_img2)
+
+
+
 
 
 
